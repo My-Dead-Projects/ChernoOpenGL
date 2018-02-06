@@ -1,6 +1,6 @@
 #  Cherno OpenGL Tutorial Project
 
-### Setting up on MacOS in Xcode
+### Setting up GLEW and GLFW in Xcode 9
 
 1. Install `GLEW` and `GLFW` with   `homebrew`
 2. Navigate to `Project > Build Phases > Link Binary With Libraries`
@@ -13,3 +13,5 @@
     + Select `All` and `Levels`
     + Use the search box to locate `Header Search Paths`
     + Add `/usr/local/include`
+
+_Note: when setting up with these project files, only step #1 should be required._
