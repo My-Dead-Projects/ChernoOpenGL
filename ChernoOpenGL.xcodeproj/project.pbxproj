@@ -11,17 +11,21 @@
 		4C3206A32029982100FD484F /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C3206A22029982100FD484F /* OpenGL.framework */; };
 		4C3206A52029984000FD484F /* libGLEW.2.1.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C3206A42029984000FD484F /* libGLEW.2.1.0.dylib */; };
 		4C3206A72029984E00FD484F /* libglfw.3.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C3206A62029984E00FD484F /* libglfw.3.2.dylib */; };
+		4C3A35A2202ACB94006830FC /* Shaders.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C3A35A0202ACB94006830FC /* Shaders.cpp */; };
+		4C3A35A6202ACE91006830FC /* FileUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C3A35A4202ACE91006830FC /* FileUtils.cpp */; };
+		4C3A35A8202AD88F006830FC /* BasicShaders.glsl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4C3A359E202AC9DC006830FC /* BasicShaders.glsl */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		4C2FE34E202908330066BEA0 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 7;
 			files = (
+				4C3A35A8202AD88F006830FC /* BasicShaders.glsl in CopyFiles */,
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -33,6 +37,12 @@
 		4C3206A62029984E00FD484F /* libglfw.3.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.3.2.dylib; path = ../../../../../../usr/local/Cellar/glfw/3.2.1/lib/libglfw.3.2.dylib; sourceTree = "<group>"; };
 		4C3206A92029A13100FD484F /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = SOURCE_ROOT; };
 		4C3206AD2029A46D00FD484F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
+		4C3A359E202AC9DC006830FC /* BasicShaders.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = BasicShaders.glsl; sourceTree = "<group>"; };
+		4C3A35A0202ACB94006830FC /* Shaders.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Shaders.cpp; sourceTree = "<group>"; };
+		4C3A35A1202ACB94006830FC /* Shaders.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Shaders.h; sourceTree = "<group>"; };
+		4C3A35A4202ACE91006830FC /* FileUtils.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FileUtils.cpp; sourceTree = "<group>"; };
+		4C3A35A5202ACE91006830FC /* FileUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileUtils.h; sourceTree = "<group>"; };
+		4C3A35AC202ADED3006830FC /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,9 +79,13 @@
 		4C2FE352202908330066BEA0 /* ChernoOpenGL */ = {
 			isa = PBXGroup;
 			children = (
-				4C2FE353202908340066BEA0 /* main.cpp */,
 				4C3206AD2029A46D00FD484F /* README.md */,
 				4C3206A92029A13100FD484F /* .gitignore */,
+				4C2FE353202908340066BEA0 /* main.cpp */,
+				4C3A35A9202AD920006830FC /* Render */,
+				4C3A35A3202ACE6E006830FC /* Util */,
+				4C3A359F202ACA9C006830FC /* Resources */,
+				4C3A35AC202ADED3006830FC /* Constants.h */,
 			);
 			path = ChernoOpenGL;
 			sourceTree = "<group>";
@@ -84,6 +98,32 @@
 				4C3206A22029982100FD484F /* OpenGL.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4C3A359F202ACA9C006830FC /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				4C3A359E202AC9DC006830FC /* BasicShaders.glsl */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		4C3A35A3202ACE6E006830FC /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				4C3A35A5202ACE91006830FC /* FileUtils.h */,
+				4C3A35A4202ACE91006830FC /* FileUtils.cpp */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		4C3A35A9202AD920006830FC /* Render */ = {
+			isa = PBXGroup;
+			children = (
+				4C3A35A1202ACB94006830FC /* Shaders.h */,
+				4C3A35A0202ACB94006830FC /* Shaders.cpp */,
+			);
+			path = Render;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -143,7 +183,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C3A35A2202ACB94006830FC /* Shaders.cpp in Sources */,
 				4C2FE354202908340066BEA0 /* main.cpp in Sources */,
+				4C3A35A6202ACE91006830FC /* FileUtils.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
