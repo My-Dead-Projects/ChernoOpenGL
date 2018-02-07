@@ -15,6 +15,7 @@
 		4C3A35A6202ACE91006830FC /* FileUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C3A35A4202ACE91006830FC /* FileUtils.cpp */; };
 		4C3A35A8202AD88F006830FC /* BasicShaders.glsl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4C3A359E202AC9DC006830FC /* BasicShaders.glsl */; };
 		4C3A35B4202AEC27006830FC /* Error.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C3A35B3202AEC27006830FC /* Error.cpp */; };
+		4C55DE8E202BAB310007D5DD /* GLError.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C55DE8D202BAB310007D5DD /* GLError.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -49,6 +50,7 @@
 		4C3A35B3202AEC27006830FC /* Error.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Error.cpp; sourceTree = "<group>"; };
 		4C3A35B5202B8D3D006830FC /* GLError.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GLError.h; sourceTree = "<group>"; };
 		4C55DE89202B96A70007D5DD /* Buffers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Buffers.h; sourceTree = "<group>"; };
+		4C55DE8D202BAB310007D5DD /* GLError.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLError.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +124,7 @@
 				4C3A35B2202AE268006830FC /* Error.h */,
 				4C3A35B3202AEC27006830FC /* Error.cpp */,
 				4C3A35B5202B8D3D006830FC /* GLError.h */,
+				4C55DE8D202BAB310007D5DD /* GLError.cpp */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -196,6 +199,7 @@
 			files = (
 				4C3A35A2202ACB94006830FC /* Shaders.cpp in Sources */,
 				4C3A35B4202AEC27006830FC /* Error.cpp in Sources */,
+				4C55DE8E202BAB310007D5DD /* GLError.cpp in Sources */,
 				4C2FE354202908340066BEA0 /* main.cpp in Sources */,
 				4C3A35A6202ACE91006830FC /* FileUtils.cpp in Sources */,
 			);
