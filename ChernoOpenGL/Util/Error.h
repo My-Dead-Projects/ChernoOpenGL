@@ -23,6 +23,11 @@ public:
         error = true;
     }
     
+    const std::string getMessage()
+    {
+        return errorMessage;
+    }
+    
     static Error OK;
 };
 

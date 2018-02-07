@@ -39,6 +39,11 @@ public:
         return glfwWindowShouldClose(window);
     }
     
+    void swapBuffers()
+    {
+        glfwSwapBuffers(window);
+    }
+    
     void terminate()
     {
         glfwTerminate();

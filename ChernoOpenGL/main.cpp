@@ -1,43 +1,25 @@
 #include <GL/glew.h>
-#include <GLFW/glfw3.h>
 #include <iostream>
 #include <sstream>
 #include "FileUtils.h"
 #include "Shaders.h"
 #include "Constants.h"
+#include "Window.h"
 using namespace std;
 
 int main() {
     
-    if (!glfwInit()) {
-        cerr << "ERROR: Could not start GLFW3" << endl;
-        return 1;
-    }
-
-#ifdef __APPLE__
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
-    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-#endif
+    Window window;
+    Error error = window.create(640, 480, "Hello Triangle");
     
-    GLFWwindow* window = glfwCreateWindow(640, 480, "Hello Triangle", NULL, NULL);
-    if (!window) {
-        cerr << "ERROR: could not open window with GLFW3" << endl;
-        glfwTerminate();
-        return 1;
+    if (error)
+    {
+        cerr << "Error: " << error.getMessage() << endl;
     }
-    glfwMakeContextCurrent(window);
     
     glewExperimental = GL_TRUE;
     glewInit();
     
-    // get version info
-    auto renderer = glGetString(GL_RENDERER);
-    auto version = glGetString(GL_VERSION);
-    cout << endl << endl
-    << "Renderer: " << renderer << endl
-    << "OpenGL version supported: " << version << endl;
     
     glEnable(GL_DEPTH_TEST);
     // depth-testing interprets a smaller value as "closer"
@@ -69,14 +51,15 @@ int main() {
     
     glBindVertexArray(vertexArrayObject);
     
-    while(!glfwWindowShouldClose(window)) {
+    while(!window.shouldClose()) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glDrawArrays(GL_TRIANGLES, 0, 3);
         glfwPollEvents();
-        glfwSwapBuffers(window);
+        window.swapBuffers();
     }
     
-    glfwTerminate();
+    window.terminate();
+    
     return 0;
 }
 
