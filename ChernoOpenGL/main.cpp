@@ -5,11 +5,7 @@
 #include "FileUtils.h"
 #include "Shaders.h"
 #include "Constants.h"
-using std::cout;
-using std::cerr;
-using std::endl;
-using std::string;
-using std::stringstream;
+using namespace std;
 
 int main() {
     
