@@ -30,6 +30,7 @@ public:
             return Error("Could not open window with GLFW3");
         }
         glfwMakeContextCurrent(window);
+        glfwSwapInterval(1);
         
         return Error::OK;
     }

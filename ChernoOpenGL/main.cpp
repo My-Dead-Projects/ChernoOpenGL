@@ -55,14 +55,32 @@ int main() {
                                    GL_STATIC_DRAW);
     bindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
     
-    Shader shader("Resources/BasicShaders.glsl");
+    Shader shader("BasicShaders.glsl");
     
     shader.use();
+    
+    GL(int location = glGetUniformLocation(shader.getProgram(), "u_color"))
+    if (location == -1)
+    {
+        throw new exception;
+    }
+    
+    
+    float r = 0;
+    float inc = .05;
     
     while(!window.shouldClose()) {
         GL(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
         
+        GL(glUniform4f(location, r, .3, .8, 1.0))
         GL(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr));
+        
+        if (r > 1)
+            inc = -.05;
+        else if (r < 0)
+            inc = .05;
+        
+        r += inc;
         
         glfwPollEvents();
         window.swapBuffers();
