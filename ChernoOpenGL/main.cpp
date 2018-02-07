@@ -1,13 +1,13 @@
 #include <GL/glew.h>
 #include <iostream>
-#include <sstream>
 #include "FileUtils.h"
 #include "Shaders.h"
 #include "Constants.h"
 #include "Window.h"
+#include "Buffers.h"
+#include "GLError.h"
 using namespace std;
 
-#include "GLError.h"
 
 int main() {
     
@@ -39,37 +39,29 @@ int main() {
         2, 3, 0
     };
     
-    uint vertexBufferObject = 0;
-    GL(glGenBuffers(1, &vertexBufferObject));
-    GL(glBindBuffer(GL_ARRAY_BUFFER, vertexBufferObject));
-    GL(glBufferData(GL_ARRAY_BUFFER, 12 * sizeof(float), points, GL_STATIC_DRAW));
+    // Create and bind vertex buffer object
+    uint vbo = createAndBindBuffer(GL_ARRAY_BUFFER,
+                                   12 * sizeof(float),
+                                   points,
+                                   GL_STATIC_DRAW);
+    // Create and bind vertex array object
+    createAndBindVAO(vbo);
     
-    uint vertexArrayObject = 0;
-    GL(glGenVertexArrays(1, &vertexArrayObject));
-    GL(glBindVertexArray(vertexArrayObject));
-    GL(glEnableVertexAttribArray(0));
-    GL(glBindBuffer(GL_ARRAY_BUFFER, vertexBufferObject));
-    GL(glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, NULL));
-    
+    // Create and bind index buffer object
     // Note: IBO must be created _after_ VAO.
-    uint indexBufferObject = 0;
-    GL(glGenBuffers(1, &indexBufferObject));
-    GL(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBufferObject));
-    GL(glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(uint), indices, GL_STATIC_DRAW));
-    
-    auto sources = file_utils::readShaderSource("Resources/BasicShaders.glsl");
+    createAndBindBuffer(GL_ELEMENT_ARRAY_BUFFER,
+                                   6 * sizeof(uint),
+                                   indices,
+                                   GL_STATIC_DRAW);
     
     Shader shader("Resources/BasicShaders.glsl");
     
     shader.use();
     
-    GL(glBindVertexArray(vertexArrayObject));
-    
     while(!window.shouldClose()) {
         GL(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
         
         GL(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr));
-        //GL(glDrawArrays(GL_TRIANGLES, 0, 3));
         
         glfwPollEvents();
         window.swapBuffers();
