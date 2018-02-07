@@ -1,141 +1,102 @@
-#define GLEW_STATIC
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
-#include <iostream>
-#include <string>
-using std::cout;
-using std::endl;
-using std::string;
-#define uint uint32_t
-
-static uint compileShader(const string& source, uint type)
-{
-    uint id = glCreateShader(type);
-    auto src = source.c_str();
-    glShaderSource(id, 1, &src, nullptr);
-    glCompileShader(id);
-    
-    int result;
-    glGetShaderiv(id, GL_COMPILE_STATUS, &result);
-    
-    if (result == GL_FALSE)
-    {
-        int length;
-        glGetShaderiv(id, GL_INFO_LOG_LENGTH, &length);
-        char message[length];
-        glGetShaderInfoLog(id, length, &length, message);
-        cout << "Failed to compile "
-             << (type == GL_VERTEX_SHADER ? "vertex" : "fragment")
-             << " shader" << endl
-             << message << endl;
-        glDeleteShader(id);
-        return 0;
-    }
-    
-    return id;
-}
-
-static uint createShader(const string& vertextShader, const string& fragmentShader)
-{
-    uint program = glCreateProgram();
-    
-    uint vs = compileShader(vertextShader, GL_VERTEX_SHADER);
-    uint fs = compileShader(fragmentShader, GL_FRAGMENT_SHADER);
-    
-    glAttachShader(program, vs);
-    glAttachShader(program, fs);
-    glLinkProgram(program);
-    glValidateProgram(program);
-    glDeleteProgram(vs);
-    glDeleteProgram(fs);
-    
-    return program;
-}
+#include <GL/glew.h> // include GLEW and new version of GL on Windows
+#include <GLFW/glfw3.h> // GLFW helper library
+#include <stdio.h>
 
 int main() {
-    
+    // start GL context and O/S window using the GLFW helper library
     if (!glfwInit()) {
-        return -1;
+        fprintf(stderr, "ERROR: could not start GLFW3\n");
+        return 1;
     }
     
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-    glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     
-    GLFWwindow *window = glfwCreateWindow(800, 600, "Learn OpenGL", nullptr, nullptr);
-    
-    if (window == nullptr)
-    {
-        std::cout << "Failed to create GLFW window" << std::endl;
+    GLFWwindow* window = glfwCreateWindow(640, 480, "Hello Triangle", NULL, NULL);
+    if (!window) {
+        fprintf(stderr, "ERROR: could not open window with GLFW3\n");
         glfwTerminate();
+        return 1;
     }
-    
     glfwMakeContextCurrent(window);
     
+    // start GLEW extension handler
     glewExperimental = GL_TRUE;
+    glewInit();
     
-    if (glewInit() != GLEW_OK)
-    {
-        cout << "Failed to initialize GLEW" << endl;
-        return -1;
-    }
+    // get version info
+    const GLubyte* renderer = glGetString(GL_RENDERER); // get renderer string
+    const GLubyte* version = glGetString(GL_VERSION); // version as a string
+    printf("Renderer: %s\n", renderer);
+    printf("OpenGL version supported %s\n", version);
     
-    cout << glGetString(GL_VERSION) << endl;
+    // tell GL to only draw onto a pixel if the shape is closer to the viewer
+    glEnable(GL_DEPTH_TEST); // enable depth-testing
+    glDepthFunc(GL_LESS); // depth-testing interprets a smaller value as "closer"
     
-    float positions[] {
-        -0.5, -0.5,
-         0.0,  0.5,
-         0.5, -0.5
+    /* OTHER STUFF GOES HERE NEXT */
+    
+    float points[] = {
+        0.0f,  0.5f,  0.0f,
+        0.5f, -0.5f,  0.0f,
+        -0.5f, -0.5f,  0.0f
     };
     
-    uint buffer;
-    glGenBuffers(1, &buffer);
-    glBindBuffer(GL_ARRAY_BUFFER, buffer);
-    glBufferData(GL_ARRAY_BUFFER, 6 * sizeof(float), positions, GL_STATIC_DRAW);
-    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, 0);
+    GLuint vbo = 0;
+    glGenBuffers(1, &vbo);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo);
+    glBufferData(GL_ARRAY_BUFFER, 9 * sizeof(float), points, GL_STATIC_DRAW);
+    
+    GLuint vao = 0;
+    glGenVertexArrays(1, &vao);
+    glBindVertexArray(vao);
     glEnableVertexAttribArray(0);
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
     
-    string vertexShader =
-    "#version 330 core\n"
-    ""
-    "layout(location = 0) in vec4 position;"
-    ""
-    "void main()"
-    "{"
-    "   gl_Position = position;"
+    const char* vertex_shader =
+    "#version 400\n"
+    "in vec3 vp;"
+    "void main() {"
+    "  gl_Position = vec4(vp, 1.0);"
     "}";
     
-    string fragmentShader =
-    "#version 330 core\n"
-    ""
-    "layout(location = 0) out vec4 color;"
-    ""
-    "void main()"
-    "{"
-    "   color = vec4(1.0, 0.0, 0.0, 1.0);"
+    const char* fragment_shader =
+    "#version 400\n"
+    "out vec4 frag_colour;"
+    "void main() {"
+    "  frag_colour = vec4(0.5, 0.0, 0.5, 1.0);"
     "}";
     
-    uint shader = createShader(vertexShader, fragmentShader);
-    glUseProgram(shader);
+    GLuint vs = glCreateShader(GL_VERTEX_SHADER);
+    glShaderSource(vs, 1, &vertex_shader, NULL);
+    glCompileShader(vs);
+    GLuint fs = glCreateShader(GL_FRAGMENT_SHADER);
+    glShaderSource(fs, 1, &fragment_shader, NULL);
+    glCompileShader(fs);
     
-    glClearColor(0.2, 0.3, 03, 1.0);
+    GLuint shader_programme = glCreateProgram();
+    glAttachShader(shader_programme, fs);
+    glAttachShader(shader_programme, vs);
+    glLinkProgram(shader_programme);
     
-    while (!glfwWindowShouldClose(window))
-    {
-        glClear(GL_COLOR_BUFFER_BIT);
-        
+    while(!glfwWindowShouldClose(window)) {
+        // wipe the drawing surface clear
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glUseProgram(shader_programme);
+        glBindVertexArray(vao);
+        // draw points 0-3 from the currently bound VAO with current in-use shader
         glDrawArrays(GL_TRIANGLES, 0, 3);
-        
-        glfwSwapBuffers(window);
-        
+        // update other events like input handling
         glfwPollEvents();
+        // put the stuff we've been drawing onto the display
+        glfwSwapBuffers(window);
     }
     
+    // close GL context and any other GLFW resources
     glfwTerminate();
-    
     return 0;
 }
 
