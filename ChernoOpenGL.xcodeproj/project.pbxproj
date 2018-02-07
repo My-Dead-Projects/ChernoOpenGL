@@ -49,6 +49,7 @@
 		4C3A35B0202AE154006830FC /* Window.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Window.h; sourceTree = "<group>"; };
 		4C3A35B2202AE268006830FC /* Error.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Error.h; sourceTree = "<group>"; };
 		4C3A35B3202AEC27006830FC /* Error.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Error.cpp; sourceTree = "<group>"; };
+		4C3A35B5202B8D3D006830FC /* GLError.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GLError.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +122,7 @@
 				4C3A35A4202ACE91006830FC /* FileUtils.cpp */,
 				4C3A35B2202AE268006830FC /* Error.h */,
 				4C3A35B3202AEC27006830FC /* Error.cpp */,
+				4C3A35B5202B8D3D006830FC /* GLError.h */,
 			);
 			path = Util;
 			sourceTree = "<group>";

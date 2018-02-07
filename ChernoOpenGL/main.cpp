@@ -6,21 +6,8 @@
 #include "Constants.h"
 #include "Window.h"
 using namespace std;
-#define GL(x) GLClearError(); x; GLLog(#x, __FILE__, __LINE__);
 
-static void GLClearError()
-{
-    while (glGetError());
-}
-
-static void GLLog(const char* func, const char* file, int line)
-{
-    while (auto error = glGetError())
-    {
-        cout << endl << "[OpenGL Error] 0x" << hex << error << dec << endl
-             << func << endl <<file << ":" << line << endl;
-    }
-}
+#include "GLError.h"
 
 int main() {
     
