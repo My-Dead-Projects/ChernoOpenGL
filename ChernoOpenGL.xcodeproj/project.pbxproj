@@ -14,7 +14,6 @@
 		4C3A35A2202ACB94006830FC /* Shaders.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C3A35A0202ACB94006830FC /* Shaders.cpp */; };
 		4C3A35A6202ACE91006830FC /* FileUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C3A35A4202ACE91006830FC /* FileUtils.cpp */; };
 		4C3A35A8202AD88F006830FC /* BasicShaders.glsl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4C3A359E202AC9DC006830FC /* BasicShaders.glsl */; };
-		4C3A35B1202AE154006830FC /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C3A35AF202AE154006830FC /* Window.cpp */; };
 		4C3A35B4202AEC27006830FC /* Error.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C3A35B3202AEC27006830FC /* Error.cpp */; };
 /* End PBXBuildFile section */
 
@@ -45,7 +44,6 @@
 		4C3A35A4202ACE91006830FC /* FileUtils.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FileUtils.cpp; sourceTree = "<group>"; };
 		4C3A35A5202ACE91006830FC /* FileUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileUtils.h; sourceTree = "<group>"; };
 		4C3A35AC202ADED3006830FC /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
-		4C3A35AF202AE154006830FC /* Window.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Window.cpp; sourceTree = "<group>"; };
 		4C3A35B0202AE154006830FC /* Window.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Window.h; sourceTree = "<group>"; };
 		4C3A35B2202AE268006830FC /* Error.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Error.h; sourceTree = "<group>"; };
 		4C3A35B3202AEC27006830FC /* Error.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Error.cpp; sourceTree = "<group>"; };
@@ -134,7 +132,6 @@
 				4C3A35A1202ACB94006830FC /* Shaders.h */,
 				4C3A35A0202ACB94006830FC /* Shaders.cpp */,
 				4C3A35B0202AE154006830FC /* Window.h */,
-				4C3A35AF202AE154006830FC /* Window.cpp */,
 				4C55DE89202B96A70007D5DD /* Buffers.h */,
 			);
 			path = Render;
@@ -201,7 +198,6 @@
 				4C3A35B4202AEC27006830FC /* Error.cpp in Sources */,
 				4C2FE354202908340066BEA0 /* main.cpp in Sources */,
 				4C3A35A6202ACE91006830FC /* FileUtils.cpp in Sources */,
-				4C3A35B1202AE154006830FC /* Window.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
