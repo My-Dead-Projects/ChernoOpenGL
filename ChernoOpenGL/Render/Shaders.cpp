@@ -1,31 +1,32 @@
 #include "Shaders.h"
 
 #include "FileUtils.h"
-#include <GL/glew.h>
+#include "GLError.h"
 #include <iostream>
+#include <GL/glew.h>
 using namespace std;
 
 uint compileShader(const string& source, uint type)
 {
-    uint id = glCreateShader(type);
+    GL(uint id = glCreateShader(type))
     auto src = source.c_str();
-    glShaderSource(id, 1, &src, nullptr);
-    glCompileShader(id);
+    GL(glShaderSource(id, 1, &src, nullptr))
+    GL(glCompileShader(id))
     
     int result;
-    glGetShaderiv(id, GL_COMPILE_STATUS, &result);
+    GL(glGetShaderiv(id, GL_COMPILE_STATUS, &result))
     
     if (result == GL_FALSE)
     {
         int length;
-        glGetShaderiv(id, GL_INFO_LOG_LENGTH, &length);
+        GL(glGetShaderiv(id, GL_INFO_LOG_LENGTH, &length))
         char message[length];
-        glGetShaderInfoLog(id, length, &length, message);
+        GL(glGetShaderInfoLog(id, length, &length, message))
         cerr << "Failed to compile "
         << (type == GL_VERTEX_SHADER ? "vertex" : "fragment")
         << " shader" << endl
         << message << endl;
-        glDeleteShader(id);
+        GL(glDeleteShader(id))
         return 0;
     }
     
@@ -34,17 +35,17 @@ uint compileShader(const string& source, uint type)
 
 uint createShaders(const string& vertexShader, const string& fragmentShader)
 {
-    uint program = glCreateProgram();
+    GL(uint program = glCreateProgram())
     
     uint vs = compileShader(vertexShader, GL_VERTEX_SHADER);
     uint fs = compileShader(fragmentShader, GL_FRAGMENT_SHADER);
     
-    glAttachShader(program, vs);
-    glAttachShader(program, fs);
-    glLinkProgram(program);
-    glValidateProgram(program);
-    glDeleteProgram(vs);
-    glDeleteProgram(fs);
+    GL(glAttachShader(program, vs))
+    GL(glAttachShader(program, fs))
+    GL(glLinkProgram(program))
+    GL(glValidateProgram(program))
+    GL(glDeleteProgram(vs))
+    GL(glDeleteProgram(fs))
     
     return program;
 }
@@ -58,5 +59,10 @@ Shader::Shader(const string& sourcePath)
 
 void Shader::use()
 {
-    glUseProgram(shaderProgram);
+    GL(glUseProgram(shaderProgram))
+}
+
+void Shader::unbind()
+{
+    GL(glUseProgram(0))
 }

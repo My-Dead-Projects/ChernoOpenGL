@@ -8,7 +8,6 @@
 #include "GLError.h"
 using namespace std;
 
-
 int main() {
     
     Window window;
@@ -21,7 +20,6 @@ int main() {
     
     glewExperimental = GL_TRUE;
     glewInit();
-    
     
     GL(glEnable(GL_DEPTH_TEST));
     // depth-testing interprets a smaller value as "closer"
@@ -40,19 +38,22 @@ int main() {
     };
     
     // Create and bind vertex buffer object
-    uint vbo = createAndBindBuffer(GL_ARRAY_BUFFER,
-                                   12 * sizeof(float),
+    uint vbo = createBuffer(GL_ARRAY_BUFFER,
+                                   8 * sizeof(float),
                                    points,
                                    GL_STATIC_DRAW);
+    bindBuffer(GL_ARRAY_BUFFER, vbo);
+    
     // Create and bind vertex array object
-    createAndBindVAO(vbo);
+    createVertexArrayObject(vbo);
     
     // Create and bind index buffer object
     // Note: IBO must be created _after_ VAO.
-    createAndBindBuffer(GL_ELEMENT_ARRAY_BUFFER,
+    uint ibo = createBuffer(GL_ELEMENT_ARRAY_BUFFER,
                                    6 * sizeof(uint),
                                    indices,
                                    GL_STATIC_DRAW);
+    bindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
     
     Shader shader("Resources/BasicShaders.glsl");
     

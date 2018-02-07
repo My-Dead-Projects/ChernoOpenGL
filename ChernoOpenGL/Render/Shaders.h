@@ -10,6 +10,11 @@ public:
     Shader(const std::string& sourcePath);
     
     void use();
+    void unbind();
+    uint getProgram()
+    {
+        return shaderProgram;
+    }
 };
 
 #endif
