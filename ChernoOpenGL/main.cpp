@@ -1,3 +1,4 @@
+#define GLEW_STATIC
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
@@ -14,12 +15,10 @@ int main() {
         return 1;
     }
 
-#ifdef __APPLE__
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-#endif
     
     GLFWwindow* window = glfwCreateWindow(640, 480, "Hello Triangle", NULL, NULL);
     if (!window) {
