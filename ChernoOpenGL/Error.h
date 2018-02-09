@@ -31,7 +31,7 @@ public:
     static Error OK()
     {
         Error e;
-        return std::move(e);
+        return e;
     }
 };
 
