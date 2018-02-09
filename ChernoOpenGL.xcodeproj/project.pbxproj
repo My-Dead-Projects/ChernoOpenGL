@@ -11,6 +11,7 @@
 		4C3206A32029982100FD484F /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C3206A22029982100FD484F /* OpenGL.framework */; };
 		4C3206A52029984000FD484F /* libGLEW.2.1.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C3206A42029984000FD484F /* libGLEW.2.1.0.dylib */; };
 		4C3206A72029984E00FD484F /* libglfw.3.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C3206A62029984E00FD484F /* libglfw.3.2.dylib */; };
+		4C6AF557202E439E00FF5F73 /* Renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C6AF555202E439E00FF5F73 /* Renderer.cpp */; };
 		4CDD037E202E1A1300F64338 /* Shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CDD037C202E1A1300F64338 /* Shader.cpp */; };
 		4CDD0381202E2CAE00F64338 /* Shaders.glsl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4CDD0380202E28E200F64338 /* Shaders.glsl */; };
 /* End PBXBuildFile section */
@@ -36,6 +37,8 @@
 		4C3206A62029984E00FD484F /* libglfw.3.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.3.2.dylib; path = ../../../../../../usr/local/Cellar/glfw/3.2.1/lib/libglfw.3.2.dylib; sourceTree = "<group>"; };
 		4C3206A92029A13100FD484F /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = SOURCE_ROOT; };
 		4C3206AD2029A46D00FD484F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
+		4C6AF555202E439E00FF5F73 /* Renderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Renderer.cpp; sourceTree = "<group>"; };
+		4C6AF556202E439E00FF5F73 /* Renderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Renderer.h; sourceTree = "<group>"; };
 		4CDD0377202D9C4200F64338 /* Window.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Window.h; sourceTree = "<group>"; };
 		4CDD0378202D9C9600F64338 /* Error.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Error.h; sourceTree = "<group>"; };
 		4CDD037C202E1A1300F64338 /* Shader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Shader.cpp; sourceTree = "<group>"; };
@@ -87,6 +90,8 @@
 				4CDD037C202E1A1300F64338 /* Shader.cpp */,
 				4CDD037F202E27A700F64338 /* Constants.h */,
 				4CDD0380202E28E200F64338 /* Shaders.glsl */,
+				4C6AF556202E439E00FF5F73 /* Renderer.h */,
+				4C6AF555202E439E00FF5F73 /* Renderer.cpp */,
 			);
 			path = ChernoOpenGL;
 			sourceTree = "<group>";
@@ -158,6 +163,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C6AF557202E439E00FF5F73 /* Renderer.cpp in Sources */,
 				4CDD037E202E1A1300F64338 /* Shader.cpp in Sources */,
 				4C2FE354202908340066BEA0 /* main.cpp in Sources */,
 			);

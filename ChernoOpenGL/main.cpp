@@ -3,6 +3,7 @@
 #include "Constants.h"
 #include "Window.h"
 #include "Shader.h"
+#include "Renderer.h"
 #include <iostream>
 
 using namespace std;
@@ -31,22 +32,31 @@ int main() {
     glDepthFunc(GL_LESS);
     
     float points[] = {
-         0.0,  0.5,  0.0,
-         0.5, -0.5,  0.0,
-        -0.5, -0.5,  0.0
+        -.5, -.5,
+         .5, -.5,
+         .5,  .5,
+        -.5,  .5,
     };
     
-    uint vertexBufferObject = 0;
-    glGenBuffers(1, &vertexBufferObject);
-    glBindBuffer(GL_ARRAY_BUFFER, vertexBufferObject);
-    glBufferData(GL_ARRAY_BUFFER, 9 * sizeof(float), points, GL_STATIC_DRAW);
+    uint indices[] = {
+        0, 1, 2,
+        2, 3, 0
+    };
+    
+    BufferObject vbo;
+    vbo.create(GL_ARRAY_BUFFER, 8 * sizeof(float), points, GL_STATIC_DRAW);
+    vbo.bind();
     
     uint vertexArrayObject = 0;
     glGenVertexArrays(1, &vertexArrayObject);
     glBindVertexArray(vertexArrayObject);
     glEnableVertexAttribArray(0);
-    glBindBuffer(GL_ARRAY_BUFFER, vertexBufferObject);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo.getObjectID());
+    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, NULL);
+    
+    BufferObject ibo;
+    ibo.create(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(uint), indices, GL_STATIC_DRAW);
+    ibo.bind();
     
     Shader shader;
     shader.compileShaders("./Shaders.glsl");
@@ -56,7 +66,9 @@ int main() {
     
     while(!window.shouldClose()) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        glDrawArrays(GL_TRIANGLES, 0, 3);
+        
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+        
         glfwPollEvents();
         window.swapBuffers();
     }
