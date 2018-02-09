@@ -1,13 +1,11 @@
 #define GLEW_STATIC
 #include <GL/glew.h>
-#include <GLFW/glfw3.h>
+#include "Constants.h"
 #include "Window.h"
+#include "Shader.h"
 #include <iostream>
-using std::cout;
-using std::cerr;
-using std::endl;
-using std::string;
-#define uint uint32_t
+
+using namespace std;
 
 int main() {
     
@@ -50,33 +48,10 @@ int main() {
     glBindBuffer(GL_ARRAY_BUFFER, vertexBufferObject);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
     
-    auto vertex_shader =
-    "#version 400\n"
-    "in vec3 vp;"
-    "void main() {"
-    "  gl_Position = vec4(vp, 1.0);"
-    "}";
+    Shader shader;
+    shader.compileShaders("./Shaders.glsl");
+    shader.bind();
     
-    auto fragment_shader =
-    "#version 400\n"
-    "out vec4 frag_colour;"
-    "void main() {"
-    "  frag_colour = vec4(0.5, 0.0, 0.5, 1.0);"
-    "}";
-    
-    uint vs = glCreateShader(GL_VERTEX_SHADER);
-    glShaderSource(vs, 1, &vertex_shader, NULL);
-    glCompileShader(vs);
-    uint fs = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(fs, 1, &fragment_shader, NULL);
-    glCompileShader(fs);
-    
-    uint shader_programme = glCreateProgram();
-    glAttachShader(shader_programme, fs);
-    glAttachShader(shader_programme, vs);
-    glLinkProgram(shader_programme);
-    
-    glUseProgram(shader_programme);
     glBindVertexArray(vertexArrayObject);
     
     while(!window.shouldClose()) {

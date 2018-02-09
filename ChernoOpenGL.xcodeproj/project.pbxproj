@@ -11,17 +11,20 @@
 		4C3206A32029982100FD484F /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C3206A22029982100FD484F /* OpenGL.framework */; };
 		4C3206A52029984000FD484F /* libGLEW.2.1.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C3206A42029984000FD484F /* libGLEW.2.1.0.dylib */; };
 		4C3206A72029984E00FD484F /* libglfw.3.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C3206A62029984E00FD484F /* libglfw.3.2.dylib */; };
+		4CDD037E202E1A1300F64338 /* Shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4CDD037C202E1A1300F64338 /* Shader.cpp */; };
+		4CDD0381202E2CAE00F64338 /* Shaders.glsl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4CDD0380202E28E200F64338 /* Shaders.glsl */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		4C2FE34E202908330066BEA0 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 16;
 			files = (
+				4CDD0381202E2CAE00F64338 /* Shaders.glsl in CopyFiles */,
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -35,6 +38,10 @@
 		4C3206AD2029A46D00FD484F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		4CDD0377202D9C4200F64338 /* Window.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Window.h; sourceTree = "<group>"; };
 		4CDD0378202D9C9600F64338 /* Error.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Error.h; sourceTree = "<group>"; };
+		4CDD037C202E1A1300F64338 /* Shader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Shader.cpp; sourceTree = "<group>"; };
+		4CDD037D202E1A1300F64338 /* Shader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Shader.h; sourceTree = "<group>"; };
+		4CDD037F202E27A700F64338 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		4CDD0380202E28E200F64338 /* Shaders.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = Shaders.glsl; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +83,10 @@
 				4CDD0377202D9C4200F64338 /* Window.h */,
 				4C3206AD2029A46D00FD484F /* README.md */,
 				4C3206A92029A13100FD484F /* .gitignore */,
+				4CDD037D202E1A1300F64338 /* Shader.h */,
+				4CDD037C202E1A1300F64338 /* Shader.cpp */,
+				4CDD037F202E27A700F64338 /* Constants.h */,
+				4CDD0380202E28E200F64338 /* Shaders.glsl */,
 			);
 			path = ChernoOpenGL;
 			sourceTree = "<group>";
@@ -147,6 +158,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CDD037E202E1A1300F64338 /* Shader.cpp in Sources */,
 				4C2FE354202908340066BEA0 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

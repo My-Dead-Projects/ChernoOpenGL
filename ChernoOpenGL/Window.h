@@ -7,7 +7,7 @@
 
 class Window {
 private:
-    GLFWwindow* window;
+    GLFWwindow* m_window;
 public:
     Error create(int width, int height, const char* title)
     {
@@ -23,25 +23,25 @@ public:
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 #endif
         
-        window = glfwCreateWindow(width, height, title, nullptr, nullptr);
-        if (!window)
+        m_window = glfwCreateWindow(width, height, title, nullptr, nullptr);
+        if (!m_window)
         {
             glfwTerminate();
             return Error("Could not open window with GLFW3");
         }
-        glfwMakeContextCurrent(window);
+        glfwMakeContextCurrent(m_window);
         
         return Error::OK();
     }
     
     bool shouldClose()
     {
-        return glfwWindowShouldClose(window);
+        return glfwWindowShouldClose(m_window);
     }
     
     void swapBuffers()
     {
-        glfwSwapBuffers(window);
+        glfwSwapBuffers(m_window);
     }
     
     void terminate()
