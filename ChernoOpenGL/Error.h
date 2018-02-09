@@ -28,7 +28,7 @@ public:
         return errorMessage;
     }
     
-    static Error&& OK()
+    static Error OK()
     {
         Error e;
         return std::move(e);
