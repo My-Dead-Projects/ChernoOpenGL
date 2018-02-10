@@ -4,6 +4,24 @@
 #include "GLError.h"
 
 /*
+ * Vertex Array Object
+ */
+
+void VertexArrayObject::create(uint index, uint size, uint type, bool normalized, uint stride, BufferObject vbo)
+{
+	GL(glGenVertexArrays(1, &m_objectID));
+	GL(glBindVertexArray(m_objectID));
+	GL(glEnableVertexAttribArray(0));
+	GL(glBindBuffer(GL_ARRAY_BUFFER, vbo.getObjectID()));
+	GL(glVertexAttribPointer(index, size, type, (normalized ? GL_TRUE : GL_FALSE), stride, nullptr));
+}
+
+uint VertexArrayObject::getObjectID()const
+{
+	return m_objectID;
+}
+
+/*
  * Buffer Object
  */
 

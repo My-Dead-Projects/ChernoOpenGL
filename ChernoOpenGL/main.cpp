@@ -48,12 +48,8 @@ int main() {
     vbo.create(GL_ARRAY_BUFFER, 8 * sizeof(float), points, GL_STATIC_DRAW);
     vbo.bind();
     
-    uint vertexArrayObject = 0;
-	GL(glGenVertexArrays(1, &vertexArrayObject));
-	GL(glBindVertexArray(vertexArrayObject));
-	GL(glEnableVertexAttribArray(0));
-	GL(glBindBuffer(GL_ARRAY_BUFFER, vbo.getObjectID()));
-	GL(glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, NULL));
+	VertexArrayObject vao;
+	vao.create(0, 2, GL_FLOAT, false, 0, vbo);
     
     BufferObject ibo;
     ibo.create(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(uint), indices, GL_STATIC_DRAW);
@@ -63,7 +59,7 @@ int main() {
     shader.compileShaders("./Shaders.glsl");
     shader.bind();
     
-	GL(glBindVertexArray(vertexArrayObject));
+	GL(glBindVertexArray(vao.getObjectID()));
     
     while(!window.shouldClose()) {
 		GL(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
