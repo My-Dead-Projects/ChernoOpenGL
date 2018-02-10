@@ -4,6 +4,7 @@
 #include "Window.h"
 #include "Shader.h"
 #include "Renderer.h"
+#include "GLError.h"
 #include <iostream>
 
 using namespace std;
@@ -21,15 +22,15 @@ int main() {
     glewInit();
     
     // get version info
-    auto renderer = glGetString(GL_RENDERER);
-    auto version = glGetString(GL_VERSION);
+	GL(auto renderer = glGetString(GL_RENDERER));
+	GL(auto version = glGetString(GL_VERSION));
     cout << endl << endl
     << "Renderer: " << renderer << endl
     << "OpenGL version supported: " << version << endl;
     
-    glEnable(GL_DEPTH_TEST);
+	GL(glEnable(GL_DEPTH_TEST));
     // depth-testing interprets a smaller value as "closer"
-    glDepthFunc(GL_LESS);
+	GL(glDepthFunc(GL_LESS));
     
     float points[] = {
         -.5, -.5,
@@ -48,11 +49,11 @@ int main() {
     vbo.bind();
     
     uint vertexArrayObject = 0;
-    glGenVertexArrays(1, &vertexArrayObject);
-    glBindVertexArray(vertexArrayObject);
-    glEnableVertexAttribArray(0);
-    glBindBuffer(GL_ARRAY_BUFFER, vbo.getObjectID());
-    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, NULL);
+	GL(glGenVertexArrays(1, &vertexArrayObject));
+	GL(glBindVertexArray(vertexArrayObject));
+	GL(glEnableVertexAttribArray(0));
+	GL(glBindBuffer(GL_ARRAY_BUFFER, vbo.getObjectID()));
+	GL(glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, NULL));
     
     BufferObject ibo;
     ibo.create(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(uint), indices, GL_STATIC_DRAW);
@@ -62,12 +63,12 @@ int main() {
     shader.compileShaders("./Shaders.glsl");
     shader.bind();
     
-    glBindVertexArray(vertexArrayObject);
+	GL(glBindVertexArray(vertexArrayObject));
     
     while(!window.shouldClose()) {
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		GL(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
         
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+		GL(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr));
         
         glfwPollEvents();
         window.swapBuffers();

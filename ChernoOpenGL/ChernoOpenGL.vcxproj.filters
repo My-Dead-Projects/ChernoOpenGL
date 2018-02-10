@@ -24,6 +24,9 @@
     <ClCompile Include="Shader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GLError.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Constants.h">
@@ -39,6 +42,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Window.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GLError.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,6 +1,7 @@
 #include "Shader.h"
 
 #include <GL/glew.h>
+#include "GLError.h"
 #include <fstream>
 #include <sstream>
 #include <iostream>
@@ -60,25 +61,25 @@ void Shader::compileShaders(const std::string& sourcePath)
     auto vertexShaderStr = source.vertexShader.c_str();
     auto fragmentShaderStr = source.fragmentShader.c_str();
     
-    uint vertexShader = glCreateShader(GL_VERTEX_SHADER);
-    glShaderSource(vertexShader, 1, &vertexShaderStr, nullptr);
-    glCompileShader(vertexShader);
-    uint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(fragmentShader, 1, &fragmentShaderStr, nullptr);
-    glCompileShader(fragmentShader);
+    GL(uint vertexShader = glCreateShader(GL_VERTEX_SHADER));
+	GL(glShaderSource(vertexShader, 1, &vertexShaderStr, nullptr));
+	GL(glCompileShader(vertexShader));
+	GL(uint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER));
+	GL(glShaderSource(fragmentShader, 1, &fragmentShaderStr, nullptr));
+	GL(glCompileShader(fragmentShader));
     
-    m_shaderProgram = glCreateProgram();
-    glAttachShader(m_shaderProgram, vertexShader);
-    glAttachShader(m_shaderProgram, fragmentShader);
-    glLinkProgram(m_shaderProgram);
+	GL(m_shaderProgram = glCreateProgram());
+	GL(glAttachShader(m_shaderProgram, vertexShader));
+	GL(glAttachShader(m_shaderProgram, fragmentShader));
+	GL(glLinkProgram(m_shaderProgram));
 }
 
 void Shader::bind()
 {
-    glUseProgram(m_shaderProgram);
+	GL(glUseProgram(m_shaderProgram));
 }
 
 void Shader::unbind()
 {
-    glUseProgram(0);
+	GL(glUseProgram(0));
 }
